@@ -17,6 +17,7 @@ namespace Infrastructure.Data
             return await _context.Products
                 .Include(p => p.ProductType)
                 .Include(p => p.ProductBrand)
+                .AsNoTracking()
                 .ToListAsync();
         }
 
@@ -30,12 +31,16 @@ namespace Infrastructure.Data
 
         public async Task<IReadOnlyList<ProductBrand>> GetProductBrandsAsync()
         {
-            return await _context.ProductBrands.ToListAsync();
+            return await _context.ProductBrands
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<IReadOnlyList<ProductType>> GetProductTypesAsync()
         {
-            return await _context.ProductTypes.ToListAsync();
+            return await _context.ProductTypes
+                .AsNoTracking()
+                .ToListAsync();
         }
     }
 }
